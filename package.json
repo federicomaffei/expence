@@ -1,0 +1,29 @@
+{
+  "name": "expence",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "nodemon -e js,jade app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/federicomaffei/expence.git"
+  },
+  "keywords": [
+    "expence",
+    "money",
+    "save"
+  ],
+  "author": "https://github.com/federicomaffei/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/federicomaffei/expence/issues"
+  },
+  "homepage": "https://github.com/federicomaffei/expence",
+  "dependencies": {
+    "hapi": "^8.1.0",
+    "jade": "^1.9.1"
+  }
+}
