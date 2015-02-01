@@ -1,13 +1,14 @@
 'use strict';
 
-var Hapi = require('hapi');
+var config = require('./config'),
+    Hapi = require('hapi');
 
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
 server.views({
     engines: {
         jade: {
-            module: require('jade'),
+            module: require('jade')
         }
     },
     path: __dirname + '/views'

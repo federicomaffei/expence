@@ -3,7 +3,7 @@
 var authentication = require('../controllers/authentication');
 var database = require('../database')
 var joi = require('joi');
-var user = require('../models/user');
+var User = require('../models/user').user;
 
 exports.register = function (server, options, next) {
     server.route({
@@ -50,7 +50,18 @@ exports.register = function (server, options, next) {
         method: 'POST',
         path: '/register',
         handler: function (request, reply) {
-            reply('Hi your e-mail is "' + request.payload.email + '", that\'s all!');
+            var newUser = new User({
+                email: request.payload.email
+            });
+
+            User.register(newUser, request.payload.password, function(err, user) {
+                // Return error if present
+                if (err) {
+                    reply(err);
+                    return;
+                }
+                reply(user);
+            });
         },
         config: {
             validate: {
