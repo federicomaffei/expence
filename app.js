@@ -11,7 +11,8 @@ server.views({
             module: require('jade')
         }
     },
-    path: __dirname + '/views'
+    path: __dirname + '/views',
+    layoutPath: __dirname + + '/views/layout'
 });
 
 server.register(require('hapi-auth-cookie'), function (err) {
