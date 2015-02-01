@@ -41,12 +41,9 @@ exports.register = function (server, options, next) {
                 }
 
                 if (user) {
-                    console.log(user);
                     request.auth.session.set(user);
                     return reply.redirect('/');
                 }
-                return reply(message);
-
             });
         },
         config: {
@@ -93,6 +90,18 @@ exports.register = function (server, options, next) {
             }
         }
     });
+
+    server.route({
+        method: 'GET',
+        path: '/logout',
+        handler: function(request, reply) {
+            request.auth.session.clear();
+            return reply('correctly logged out');
+        },
+        config: {
+            auth: 'session'
+        }
+    })
 
 };
 
