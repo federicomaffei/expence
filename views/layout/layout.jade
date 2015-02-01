@@ -5,9 +5,11 @@ html(lang="eng")
             title expence
     body
         h2 expence
-        span please&nbsp;
-        a(href="login") login
-        span &nbsp;or&nbsp;
-        a(href="register") register
-
+        if isUserAuthenticated === false
+            span please&nbsp;
+            a(href="login") login
+            span &nbsp;or&nbsp;
+            a(href="register") register
+        else
+            a(href="logout") logout
         block content

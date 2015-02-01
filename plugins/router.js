@@ -4,13 +4,14 @@ var authentication = require('../controllers/authentication');
 var database = require('../database')
 var joi = require('joi');
 var User = require('../models/user').User;
+var isUserAuthenticated = false;
 
 exports.register = function (server, options, next) {
     server.route({
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
-            reply.view('index');
+            reply.view('index', { isUserAuthenticated: isUserAuthenticated });
         }
     });
 
@@ -18,7 +19,7 @@ exports.register = function (server, options, next) {
         method: 'GET',
         path: '/login',
         handler: function (request, reply) {
-            reply.view('login');
+            reply.view('login', { isUserAuthenticated: isUserAuthenticated });
         }
     });
 
@@ -26,7 +27,7 @@ exports.register = function (server, options, next) {
         method: 'GET',
         path: '/register',
         handler: function (request, reply) {
-            reply.view('register');
+            reply.view('register', { isUserAuthenticated: isUserAuthenticated });
         }
     });
 
@@ -42,6 +43,7 @@ exports.register = function (server, options, next) {
 
                 if (user) {
                     request.auth.session.set(user);
+                    isUserAuthenticated = true;
                     return reply.redirect('/');
                 }
             });
@@ -96,7 +98,8 @@ exports.register = function (server, options, next) {
         path: '/logout',
         handler: function(request, reply) {
             request.auth.session.clear();
-            return reply('correctly logged out');
+            isUserAuthenticated = false;
+            return reply.redirect('/');
         },
         config: {
             auth: 'session'
