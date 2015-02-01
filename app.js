@@ -1,7 +1,6 @@
-'use strict';
+"use strict";
 
-var config = require('./config'),
-    Hapi = require('hapi');
+var Hapi = require('hapi');
 
 var server = new Hapi.Server();
 server.connection({ port: 3000 });
@@ -12,7 +11,7 @@ server.views({
         }
     },
     path: __dirname + '/views',
-    layoutPath: __dirname + + '/views/layout'
+    layoutPath: __dirname + '/views/layout'
 });
 
 server.register(require('hapi-auth-cookie'), function (err) {

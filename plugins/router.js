@@ -1,12 +1,11 @@
 'use strict';
 
-var authentication = require('../controllers/authentication');
-var database = require('../database')
+//var authentication = require('../controllers/authentication');
 var joi = require('joi');
 var User = require('../models/user').User;
 var isUserAuthenticated = false;
 
-exports.register = function (server, options, next) {
+exports.register = function (server) {
     server.route({
         method: 'GET',
         path: '/',
@@ -35,7 +34,7 @@ exports.register = function (server, options, next) {
         method: 'POST',
         path: '/login',
         handler: function (request, reply) {
-            User.authenticate()(request.payload.email, request.payload.password, function (err, user, message) {
+            User.authenticate()(request.payload.email, request.payload.password, function (err, user) {
                 if (err) {
                     console.error(err);
                     return reply.redirect('/login');
@@ -104,8 +103,7 @@ exports.register = function (server, options, next) {
         config: {
             auth: 'session'
         }
-    })
-
+    });
 };
 
 exports.register.attributes = {

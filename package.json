@@ -29,5 +29,9 @@
     "joi": "^5.1.0",
     "mongoose": "^3.8.22",
     "passport-local-mongoose": "^1.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.11.0"
   }
 }

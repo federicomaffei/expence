@@ -7,8 +7,8 @@ mongoose.connect('mongodb://' + config.mongo.username + ':' + config.mongo.passw
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function (callback) {
-    console.log('connection with database succeeded.')
+db.once('open', function () {
+    console.log('connection with database succeeded.');
 });
 
 exports.mongoose = mongoose;
