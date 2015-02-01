@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var Hapi = require('hapi');
 
@@ -10,32 +10,22 @@ server.views({
             module: require('jade')
         }
     },
-    path: __dirname + '/views',
-    layoutPath: __dirname + '/views/layout'
+    path: __dirname + '/src/views',
+    layoutPath: __dirname + '/src/views/layout'
 });
 
-server.register(require('hapi-auth-cookie'), function (err) {
+server.register([
+    require('hapi-auth-cookie'),
+    require('./src/plugins/authentication'),
+    require('./src/plugins/router')
+], function (err) {
 
     if(err) {
-        console.log('auth plugin not loaded.');
+        console.log('plugins not loaded.');
     }
 
-    server.auth.strategy('session', 'cookie', {
-        password: 'expencesecret',
-        cookie: 'session',
-        redirectTo: false,
-        isSecure: false,
-        ttl: 24* 60 * 60 * 1000
+    server.start(function () {
+        console.log('Server running at:', server.info.uri);
     });
 });
 
-server.register(require('./plugins/router'), function (err) {
-
-    if(err) {
-        console.log('router plugin not loaded.');
-    }
-});
-
-server.start(function () {
-    console.log('Server running at:', server.info.uri);
-});

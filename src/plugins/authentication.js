@@ -1,24 +1,31 @@
 'use strict';
 
-//var authentication = require('../controllers/authentication');
 var joi = require('joi');
 var User = require('../models/user').User;
-var isUserAuthenticated = false;
 
-exports.register = function (server) {
-    server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-            reply.view('index', { isUserAuthenticated: isUserAuthenticated });
+exports.register = function(server, options, next) {
+
+    server.auth.strategy('session', 'cookie', {
+        password: 'expencesecret',
+        cookie: 'session',
+        redirectTo: false,
+        isSecure: false,
+        ttl: 24* 60 * 60 * 1000
+    });
+
+    server.ext('onPostAuth', function(req, reply) {
+        if(req.auth.isAuthenticated) {
+            console.log('user authenticated');
+            req.username = req.auth.credentials.username;
         }
+        reply.continue();
     });
 
     server.route({
         method: 'GET',
         path: '/login',
         handler: function (request, reply) {
-            reply.view('login', { isUserAuthenticated: isUserAuthenticated });
+            reply.view('login');
         }
     });
 
@@ -26,7 +33,7 @@ exports.register = function (server) {
         method: 'GET',
         path: '/register',
         handler: function (request, reply) {
-            reply.view('register', { isUserAuthenticated: isUserAuthenticated });
+            reply.view('register');
         }
     });
 
@@ -34,24 +41,22 @@ exports.register = function (server) {
         method: 'POST',
         path: '/login',
         handler: function (request, reply) {
-            User.authenticate()(request.payload.email, request.payload.password, function (err, user) {
+            User.authenticate()(request.payload.email, request.payload.password, function (err, user, message) {
                 if (err) {
                     console.error(err);
                     return reply.redirect('/login');
                 }
 
                 if (user) {
-                    request.auth.session.set(user);
-                    isUserAuthenticated = true;
-                    return reply.redirect('/');
+                    request.auth.session.set({ user: user });
+                    return reply.redirect('/testpage');
                 }
+
+                return reply(message);
             });
         },
         config: {
-            auth: {
-                mode: 'try',
-                strategy: 'session'
-            },
+            auth: false,
             plugins: {
                 'hapi-auth-cookie': {
                     redirectTo: false
@@ -97,16 +102,18 @@ exports.register = function (server) {
         path: '/logout',
         handler: function(request, reply) {
             request.auth.session.clear();
-            isUserAuthenticated = false;
             return reply.redirect('/');
         },
         config: {
             auth: 'session'
         }
     });
+
+    next();
 };
 
+
 exports.register.attributes = {
-    name: 'router',
+    name: 'authentication',
     version: '1.0.0'
 };

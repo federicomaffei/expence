@@ -1,6 +1,6 @@
 'use strict';
 
-var mongoose = require('../database').mongoose,
+var mongoose = require('../../database').mongoose,
     passportLocalMongoose = require('passport-local-mongoose');
 
 var userSchema = new mongoose.Schema({
