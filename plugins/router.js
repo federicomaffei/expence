@@ -3,7 +3,7 @@
 var authentication = require('../controllers/authentication');
 var database = require('../database')
 var joi = require('joi');
-var User = require('../models/user').user;
+var User = require('../models/user').User;
 
 exports.register = function (server, options, next) {
     server.route({
@@ -34,9 +34,31 @@ exports.register = function (server, options, next) {
         method: 'POST',
         path: '/login',
         handler: function (request, reply) {
-            reply('Hi your e-mail is "' + request.payload.email + '", that\'s all!');
+            User.authenticate()(request.payload.email, request.payload.password, function (err, user, message) {
+                if (err) {
+                    console.error(err);
+                    return reply.redirect('/login');
+                }
+
+                if (user) {
+                    console.log(user);
+                    request.auth.session.set(user);
+                    return reply.redirect('/');
+                }
+                return reply(message);
+
+            });
         },
         config: {
+            auth: {
+                mode: 'try',
+                strategy: 'session'
+            },
+            plugins: {
+                'hapi-auth-cookie': {
+                    redirectTo: false
+                }
+            },
             validate: {
                 payload: {
                     email: joi.string().email().required(),
@@ -55,7 +77,6 @@ exports.register = function (server, options, next) {
             });
 
             User.register(newUser, request.payload.password, function(err, user) {
-                // Return error if present
                 if (err) {
                     reply(err);
                     return;
