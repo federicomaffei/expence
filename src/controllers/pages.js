@@ -5,7 +5,10 @@ exports.init = function(server) {
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
-            reply.view('index');
+            reply.view('index', {isLogged: request.auth.isAuthenticated, username: request.username});
+        },
+        config: {
+            auth: 'session'
         }
     });
 

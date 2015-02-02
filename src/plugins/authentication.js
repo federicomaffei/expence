@@ -8,15 +8,14 @@ exports.register = function(server, options, next) {
     server.auth.strategy('session', 'cookie', {
         password: 'expencesecret',
         cookie: 'session',
-        redirectTo: false,
+        redirectTo: '/login',
         isSecure: false,
         ttl: 24* 60 * 60 * 1000
     });
 
     server.ext('onPostAuth', function(req, reply) {
         if(req.auth.isAuthenticated) {
-            console.log('user authenticated');
-            req.username = req.auth.credentials.username;
+            req.username = req.auth.credentials.user.email;
         }
         reply.continue();
     });
@@ -49,7 +48,7 @@ exports.register = function(server, options, next) {
 
                 if (user) {
                     request.auth.session.set({ user: user });
-                    return reply.redirect('/testpage');
+                    return reply.redirect('/');
                 }
 
                 return reply(message);
