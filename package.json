@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "mocha",
-    "start": "nodemon -e js app.js"
+    "start": "nodemon -e js,jade app.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
     "jade": "^1.9.1",
     "joi": "^5.1.0",
     "mongoose": "^3.8.22",
+    "mongoose-currency": "0.0.4",
     "passport-local-mongoose": "^1.0.0"
   },
   "devDependencies": {

@@ -1,0 +1,16 @@
+extends layout/layout
+
+block content
+    h2 Please add an expense:
+    form(method="post" action="add-expense")
+        p
+            input(type="text" name="amount" value="" placeholder="amount")
+        p
+            select(name="currency")
+                option(value="GBP" selected=true ) &pound;
+                option(value="USD") &#36;
+                option(value="EUR") &euro;
+        p
+            input(type="text" name="reason" value="" placeholder="reason")
+        p
+            input(type="submit" value="add expense!")
