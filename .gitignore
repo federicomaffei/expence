@@ -3,5 +3,5 @@ config.js
 
 .DS_Store
 
-.idea/*
+.idea
 npm-debug.log

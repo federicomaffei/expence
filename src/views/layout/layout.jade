@@ -6,7 +6,7 @@ html(lang="eng")
     body
         h2 expence
         if isLogged === true
-            span welcome, #{username}&nbsp;
+            span welcome, #{user.username}&nbsp;
             a(href="logout") logout
         else
             span please&nbsp;

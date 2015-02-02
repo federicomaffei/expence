@@ -15,7 +15,7 @@ exports.register = function(server, options, next) {
 
     server.ext('onPostAuth', function(req, reply) {
         if(req.auth.isAuthenticated) {
-            req.username = req.auth.credentials.user.email;
+            req.user = req.auth.credentials.user;
         }
         reply.continue();
     });
@@ -40,7 +40,7 @@ exports.register = function(server, options, next) {
         method: 'POST',
         path: '/login',
         handler: function (request, reply) {
-            User.authenticate()(request.payload.email, request.payload.password, function (err, user, message) {
+            User.authenticate()(request.payload.username, request.payload.password, function (err, user, message) {
                 if (err) {
                     console.error(err);
                     return reply.redirect('/login');
@@ -63,7 +63,7 @@ exports.register = function(server, options, next) {
             },
             validate: {
                 payload: {
-                    email: joi.string().email().required(),
+                    username: joi.string().required(),
                     password: joi.string().required()
                 }
             }
@@ -75,7 +75,8 @@ exports.register = function(server, options, next) {
         path: '/register',
         handler: function (request, reply) {
             var newUser = new User({
-                email: request.payload.email
+                email: request.payload.email,
+                username: request.payload.username
             });
 
             User.register(newUser, request.payload.password, function(err, user) {
@@ -83,13 +84,14 @@ exports.register = function(server, options, next) {
                     reply(err);
                     return;
                 }
-                reply(user);
+                reply.redirect('/');
             });
         },
         config: {
             validate: {
                 payload: {
                     email: joi.string().email().required(),
+                    username: joi.string().required(),
                     password: joi.string().required()
                 }
             }

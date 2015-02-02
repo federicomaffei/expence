@@ -8,6 +8,10 @@ var userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     password: {
         type: String,
         required: true
@@ -19,7 +23,7 @@ var userSchema = new mongoose.Schema({
     }
 });
 
-userSchema.plugin(passportLocalMongoose, { usernameField: 'email', hashField: 'password', usernameLowerCase: true });
+userSchema.plugin(passportLocalMongoose, { usernameField: 'username', hashField: 'password', usernameLowerCase: true });
 
 var User = mongoose.model('User', userSchema, 'Users');
 

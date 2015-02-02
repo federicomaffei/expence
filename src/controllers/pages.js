@@ -7,7 +7,7 @@ exports.init = function(server) {
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
-            reply.view('index', {isLogged: request.auth.isAuthenticated, username: request.username});
+            reply.view('index', {isLogged: request.auth.isAuthenticated, user: request.user});
         },
         config: {
             auth: 'session'
@@ -18,7 +18,7 @@ exports.init = function(server) {
         method: 'GET',
         path: '/add-expense',
         handler: function (request, reply) {
-            reply.view('add-expense', {isLogged: request.auth.isAuthenticated, username: request.username});
+            reply.view('add-expense', {isLogged: request.auth.isAuthenticated, user: request.user});
         },
         config: {
             auth: 'session'
@@ -29,10 +29,10 @@ exports.init = function(server) {
         method: 'POST',
         path: '/add-expense',
         handler: function (request, reply) {
-            console.log('posted expense by:' + request.username);
+            console.log('posted expense by:' + request.user.username);
             var expense = new Expense({
                 amount: request.payload.amount,
-                creator: request.username,
+                creator: request.user.username,
                 currency: request.payload.currency,
                 reason: request.payload.reason
             });
