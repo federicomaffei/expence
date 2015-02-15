@@ -16,9 +16,9 @@ exports.init = function(server) {
 
     server.route({
         method: 'GET',
-        path: '/add-expense',
+        path: '/expenses/new',
         handler: function (request, reply) {
-            reply.view('add-expense', {isLogged: request.auth.isAuthenticated, user: request.user});
+            reply.view('expenses/new', {isLogged: request.auth.isAuthenticated, user: request.user});
         },
         config: {
             auth: 'session'
@@ -27,7 +27,7 @@ exports.init = function(server) {
 
     server.route({
         method: 'POST',
-        path: '/add-expense',
+        path: '/expenses',
         handler: function (request, reply) {
             var expense = new Expense({
                 amount: request.payload.amount,
@@ -36,7 +36,7 @@ exports.init = function(server) {
                 reason: request.payload.reason
             });
             expense.save();
-            reply.redirect('/add-expense');
+            reply.redirect('expenses/new');
         },
         config: {
             auth: 'session'
