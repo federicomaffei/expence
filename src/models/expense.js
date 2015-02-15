@@ -10,8 +10,8 @@ var expenseSchema = new mongoose.Schema({
         required: true
     },
     creator: {
-        type: String,
-        //ref: 'User',
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
         required: true
     },
     currency: {

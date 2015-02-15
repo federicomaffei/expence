@@ -29,10 +29,9 @@ exports.init = function(server) {
         method: 'POST',
         path: '/add-expense',
         handler: function (request, reply) {
-            console.log('posted expense by:' + request.user.username);
             var expense = new Expense({
                 amount: request.payload.amount,
-                creator: request.user.username,
+                creator: request.user._id,
                 currency: request.payload.currency,
                 reason: request.payload.reason
             });
