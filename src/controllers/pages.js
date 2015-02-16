@@ -42,4 +42,17 @@ exports.init = function(server) {
             auth: 'session'
         }
     });
+
+    server.route({
+        method: 'GET',
+        path: '/expenses',
+        handler: function (request, reply) {
+            Expense.find({creator: request.user._id}, function(err, docs){
+                reply.view('expenses/index', {isLogged: request.auth.isAuthenticated, user: request.user, expenses: docs});
+            });
+        },
+        config: {
+            auth: 'session'
+        }
+    });
 };
