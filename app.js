@@ -2,7 +2,15 @@
 
 var Hapi = require('hapi');
 
-var server = new Hapi.Server();
+var server = new Hapi.Server({
+    connections: {
+        router: {
+            isCaseSensitive: false,
+            stripTrailingSlash: true
+        }
+    }
+});
+
 server.connection({ port: 3000 });
 server.views({
     engines: {
@@ -24,7 +32,10 @@ server.register([
         console.log('plugins not loaded.');
     }
 
-    server.start(function () {
+    server.start(function (err) {
+        if(err) {
+          console.log(err);
+        };
         console.log('Server running at:', server.info.uri);
     });
 });

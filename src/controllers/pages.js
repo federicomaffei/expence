@@ -36,7 +36,7 @@ exports.init = function(server) {
                 reason: request.payload.reason
             });
             expense.save();
-            reply.redirect('expenses/new');
+            reply.redirect('expenses');
         },
         config: {
             auth: 'session'

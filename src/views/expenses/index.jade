@@ -3,4 +3,4 @@ block content
     h2 Here are your expenses:
     ul
         each expense in expenses
-            li #{expense.amount} - #{expense.reason} at #{expense.creationDate}
+            li #{expense.amount} #{expense.currency} for #{expense.reason} at #{expense.creationDate}

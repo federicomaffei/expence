@@ -8,6 +8,10 @@ html(lang="eng")
         if isLogged === true
             span welcome, #{user.username}&nbsp;
             a(href="logout") logout
+            span &nbsp;
+            a(href="/expenses/new") add new expense
+            span &nbsp;
+            a(href="/expenses") see expenses
         else
             span please&nbsp;
             a(href="login") login
