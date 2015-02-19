@@ -7,10 +7,15 @@ exports.init = function(server) {
         method: 'GET',
         path: '/',
         handler: function (request, reply) {
-            reply.view('index', {isLogged: request.auth.isAuthenticated, user: request.user});
+            if(request.state.session) {
+                reply.view('index', {user: request.state.session.user});
+            }
+            else {
+                reply.view('index');
+            }
         },
         config: {
-            auth: 'session'
+            auth: false
         }
     });
 
@@ -18,7 +23,7 @@ exports.init = function(server) {
         method: 'GET',
         path: '/expenses/new',
         handler: function (request, reply) {
-            reply.view('expenses/new', {isLogged: request.auth.isAuthenticated, user: request.user});
+            reply.view('expenses/new');
         },
         config: {
             auth: 'session'
@@ -48,7 +53,7 @@ exports.init = function(server) {
         path: '/expenses',
         handler: function (request, reply) {
             Expense.find({creator: request.user._id}, function(err, docs){
-                reply.view('expenses/index', {isLogged: request.auth.isAuthenticated, user: request.user, expenses: docs});
+                reply.view('expenses/index', { expenses: docs });
             });
         },
         config: {

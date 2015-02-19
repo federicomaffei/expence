@@ -5,16 +5,16 @@ html(lang="eng")
             title expence
     body
         h2 expence
-        if isLogged === true
+        if user
             span welcome, #{user.username}&nbsp;
-            a(href="logout") logout
+            a(href="/logout") logout
             span &nbsp;
             a(href="/expenses/new") add new expense
             span &nbsp;
             a(href="/expenses") see expenses
         else
             span please&nbsp;
-            a(href="login") login
+            a(href="/login") login
             span &nbsp;or&nbsp;
-            a(href="register") register
+            a(href="/register") register
         block content

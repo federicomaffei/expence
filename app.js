@@ -7,6 +7,13 @@ var server = new Hapi.Server({
         router: {
             isCaseSensitive: false,
             stripTrailingSlash: true
+        },
+        routes: {
+            validate: {
+                options: {
+                    allowUnknown: true
+                }
+            }
         }
     }
 });
@@ -18,6 +25,7 @@ server.views({
             module: require('jade')
         }
     },
+    context: {},
     path: __dirname + '/src/views',
     layoutPath: __dirname + '/src/views/layout'
 });
@@ -25,7 +33,8 @@ server.views({
 server.register([
     require('hapi-auth-cookie'),
     require('./src/plugins/authentication'),
-    require('./src/plugins/router')
+    require('./src/plugins/router'),
+    require('./src/plugins/viewEngine')
 ], function (err) {
 
     if(err) {
