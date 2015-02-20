@@ -1,6 +1,7 @@
 'use strict';
 
-var Hapi = require('hapi');
+var Path = require('path'),
+    Hapi = require('hapi');
 
 var server = new Hapi.Server({
     connections: {
@@ -9,6 +10,9 @@ var server = new Hapi.Server({
             stripTrailingSlash: true
         },
         routes: {
+            files: {
+                relativeTo: Path.join(__dirname, 'public')
+            },
             validate: {
                 options: {
                     allowUnknown: true
