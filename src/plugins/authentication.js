@@ -6,7 +6,7 @@ var User = require('../models/user').User;
 exports.register = function(server, options, next) {
 
     server.auth.strategy('session', 'cookie', {
-        password: 'expencesecret',
+        password: process.env.HAPI_AUTH_SECRET,
         cookie: 'session',
         redirectTo: '/login',
         isSecure: false,
