@@ -1,12 +1,10 @@
 'use strict';
 
 var mongoose = require('../../database').mongoose;
-require('mongoose-currency').loadType(mongoose);
-var Currency = mongoose.Types.Currency;
 
 var expenseSchema = new mongoose.Schema({
     amount: {
-        type: Currency,
+        type: Number,
         required: true
     },
     creator: {

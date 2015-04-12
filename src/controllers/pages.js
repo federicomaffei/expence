@@ -35,7 +35,7 @@ exports.init = function(server) {
         path: '/expenses',
         handler: function (request, reply) {
             var expense = new Expense({
-                amount: request.payload.amount,
+                amount: request.payload.amount * 100,
                 creator: request.user._id,
                 currency: request.payload.currency,
                 reason: request.payload.reason
