@@ -1,0 +1,41 @@
+a.titlelink {
+    text-decoration: none;
+    color: black;
+}
+
+div.header {
+    height: 50px;
+}
+
+div.row {
+    height: 100%;
+}
+
+div.navbar {
+    height: 100%;
+}
+
+div.four.columns.navbar {
+    position: relative;
+}
+
+div.eight.columns.navbar {
+    margin-left: 0;
+    position: relative;
+}
+
+div.menu {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+div.logo {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+h4.maintitle {
+    margin: 0;
+}

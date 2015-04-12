@@ -3,20 +3,29 @@ html(lang="eng")
     head
         link(rel='stylesheet', href='/css/skeleton.css')
         link(rel='stylesheet', href='/css/normalize.css')
+        link(rel='stylesheet', href='/css/header.css')
         block title
             title expence
     body
-        h2 expence
-        if user
-            span welcome, #{user.username}&nbsp;
-            a(href="/logout") logout
-            span &nbsp;
-            a(href="/expenses/new") add new expense
-            span &nbsp;
-            a(href="/expenses") see expenses
-        else
-            span please&nbsp;
-            a(href="/login") login
-            span &nbsp;or&nbsp;
-            a(href="/register") register
-        block content
+        div.container
+            div.header
+                div.row
+                    div(class='four columns navbar')
+                        div.logo
+                            h4.maintitle
+                                a.titlelink(href='/') expence
+                    div(class='eight columns navbar')
+                        div.menu
+                            if user
+                                span welcome, #{user.username}&nbsp;
+                                a(href="/logout") logout
+                                span &nbsp;
+                                a(href="/expenses/new") add new expense
+                                span &nbsp;
+                                a(href="/expenses") see expenses
+                            else
+                                span please&nbsp;
+                                a(href="/login") login
+                                span &nbsp;or&nbsp;
+                                a(href="/register") register
+            block content

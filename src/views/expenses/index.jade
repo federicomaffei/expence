@@ -1,6 +1,6 @@
 extends ../layout/layout
 block content
-    h2 Here are your expenses:
+    h4 Here are your expenses:
     ul
         each expense in expenses
             li #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.reason} at #{expense.creationDate}
