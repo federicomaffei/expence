@@ -3,8 +3,14 @@ a.titlelink {
     color: black;
 }
 
+a.button {
+    margin: 0 5px 0 5px;
+    padding: 0 15px;
+}
+
 div.header {
     height: 50px;
+    margin-bottom: 30px;
 }
 
 div.row {
@@ -15,19 +21,20 @@ div.navbar {
     height: 100%;
 }
 
-div.four.columns.navbar {
+div.two.columns.navbar {
     position: relative;
 }
 
-div.eight.columns.navbar {
+div.ten.columns.navbar {
     margin-left: 0;
     position: relative;
 }
 
-div.menu {
+div.usermenu {
     position: absolute;
     top: 50%;
-    transform: translateY(-50%);
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 div.logo {

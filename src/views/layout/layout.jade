@@ -10,22 +10,17 @@ html(lang="eng")
         div.container
             div.header
                 div.row
-                    div(class='four columns navbar')
+                    div(class='two columns navbar')
                         div.logo
                             h4.maintitle
                                 a.titlelink(href='/') expence
-                    div(class='eight columns navbar')
-                        div.menu
+                    div(class='ten columns navbar')
+                        div.usermenu
                             if user
                                 span welcome, #{user.username}&nbsp;
-                                a(href="/logout") logout
-                                span &nbsp;
-                                a(href="/expenses/new") add new expense
-                                span &nbsp;
-                                a(href="/expenses") see expenses
+                                a(class="button" href="/expenses/new") add expense
+                                a(class="button" href="/logout") logout
                             else
-                                span please&nbsp;
-                                a(href="/login") login
-                                span &nbsp;or&nbsp;
-                                a(href="/register") register
+                                a(class="button" href="/login") login
+                                a(class="button" href="/register") register
             block content
