@@ -1,7 +1,8 @@
 'use strict';
 
 var accounting = require('../lib/accounting'),
-    Expense    = require('../models/expense').Expense;
+    Expense    = require('../models/expense').Expense,
+    moment     = require('moment');
 
 exports.init = function(server) {
     server.route({
@@ -55,7 +56,10 @@ exports.init = function(server) {
         handler: function (request, reply) {
             Expense.find({creator: request.user._id}, function(err, docs){
                 accounting.calculateTotal(docs, function(total) {
-                    reply.view('expenses/index', { expenses: docs, total: total });
+                    reply.view('expenses/index', {
+                        expenses: docs,
+                        moment: moment,
+                        total: total });
                 });
             });
         },

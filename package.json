@@ -27,6 +27,7 @@
     "hapi-auth-cookie": "^2.0.0",
     "jade": "^1.9.1",
     "joi": "^5.1.0",
+    "moment": "^2.10.2",
     "mongoose": "^3.8.22",
     "mongoose-currency": "0.0.4",
     "passport-local-mongoose": "^1.0.0"

@@ -1,9 +1,9 @@
 extends ../layout/layout
 block content
     h4 Here are your expenses:
-    ul
+    ul.expense-list
         each expense in expenses
-            li #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.reason} at #{expense.creationDate}
+            li.expense-item #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.reason} at #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}
     h4 Total expense:
     p
         span #{(total/100).toFixed(2)} GBP
