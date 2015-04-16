@@ -4,3 +4,6 @@ block content
     ul
         each expense in expenses
             li #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.reason} at #{expense.creationDate}
+    h4 Total expense:
+    p
+        span #{(total/100).toFixed(2)} GBP
