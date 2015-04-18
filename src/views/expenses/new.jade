@@ -4,13 +4,21 @@ block content
     h4 Please add an expense:
     form(method="post" action="/expenses")
         p
-            input(type="text" name="amount" value="" placeholder="amount")
+            label amount
+            input(type="text" name="amount" value="5.00" placeholder="5.00")
         p
+            label currency
             select(name="currency")
-                option(value="GBP" selected=true ) &pound;
+                option(value="GBP" selected=true) &pound;
                 option(value="USD") &#36;
                 option(value="EUR") &euro;
         p
-            input(type="text" name="reason" value="" placeholder="reason")
+            label category
+            select(name="category")
+                option(value="shopping" selected=true) shopping
+                option(value="drinks & food") drinks & food
+                option(value="rent") rent
+                option(value="bills") bills
+                option(value="various") various
         p
-            input(type="submit" value="add expense!")
+            input(class="button-primary" type="submit" value="submit")

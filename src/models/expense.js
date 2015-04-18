@@ -17,7 +17,7 @@ var expenseSchema = new mongoose.Schema({
         required: true,
         default: 'GBP'
     },
-    reason: {
+    category: {
         type: String,
         required: true
     },

@@ -40,7 +40,7 @@ exports.init = function(server) {
                 amount: request.payload.amount * 100,
                 creator: request.user._id,
                 currency: request.payload.currency,
-                reason: request.payload.reason
+                category: request.payload.category
             });
             expense.save();
             reply.redirect('expenses');

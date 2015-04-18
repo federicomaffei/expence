@@ -3,7 +3,7 @@ block content
     h4 Here are your expenses:
     ul.expense-list
         each expense in expenses
-            li.expense-item #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.reason} at #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}
+            li.expense-item #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.category} on #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}
     h4 Total expense:
     p
         span #{(total/100).toFixed(2)} GBP
