@@ -1,7 +1,11 @@
-ul.expense-list {
-    list-style:none;
+div.edit-form {
+    display: none;
 }
 
-i.delete-icon {
+i.item-icon {
     margin-left: 15px;
+}
+
+ul.expense-list {
+    list-style:none;
 }

@@ -3,22 +3,6 @@ extends ../layout/layout
 block content
     h4 Please add an expense:
     form(method="post" action="/expenses")
-        p
-            label amount
-            input(type="text" name="amount" value="5.00" placeholder="5.00")
-        p
-            label currency
-            select(name="currency")
-                option(value="GBP" selected=true) &pound;
-                option(value="USD") &#36;
-                option(value="EUR") &euro;
-        p
-            label category
-            select(name="category")
-                option(value="shopping" selected=true) shopping
-                option(value="drinks & food") drinks & food
-                option(value="rent") rent
-                option(value="bills") bills
-                option(value="various") various
+        include ../partials/expense-form
         p
             input(class="button-primary" type="submit" value="submit")

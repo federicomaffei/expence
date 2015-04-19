@@ -12,19 +12,5 @@ html(lang="eng")
             title expence
     body
         div.container
-            div.header
-                div.row
-                    div(class='two columns navbar')
-                        div.logo
-                            h4.maintitle
-                                a.titlelink(href='/') expence
-                    div(class='ten columns navbar')
-                        div.usermenu
-                            if user
-                                span welcome, #{user.username}&nbsp;
-                                a(class="button" href="/expenses/new") add expense
-                                a(class="button" href="/logout") logout
-                            else
-                                a(class="button" href="/login") login
-                                a(class="button" href="/register") register
+            include ../partials/header.jade
             block content

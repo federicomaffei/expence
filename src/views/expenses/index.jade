@@ -1,11 +1,27 @@
 extends ../layout/layout
+
 block content
     h4 Here are your expenses:
     ul.expense-list
         each expense in expenses
-            li(id='expense-#{expense._id}') #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.category} on #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}&nbsp;
-                span(class='delete-link' data-id='#{expense._id}' data-amount='#{expense.amount}' data-method='delete')
-                    i(class='delete-icon fa fa-trash-o fa-2x')
+            li(id='expense-#{expense._id}')
+                span(id='expense-amount-#{expense._id}') #{(expense.amount/100).toFixed(2)}
+                span &nbsp;
+                span(id='expense-currency-#{expense._id}') #{expense.currency}
+                span &nbsp;for&nbsp;
+                span(id='expense-category-#{expense._id}') #{expense.category}
+                span &nbsp;on&nbsp;
+                span(id='expense-creation-#{expense._id}') #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}
+                span &nbsp;
+                span(class='edit-link' data-id='#{expense._id}')
+                    i(class='item-icon fa fa-pencil fa-2x')
+                span(class='delete-link' data-id='#{expense._id}' data-amount='#{expense.amount}')
+                    i(class='item-icon fa fa-trash-o fa-2x')
+                div(id='edit-form-#{expense._id}' class='edit-form')
+                    p
+                        include ../partials/expense-form
+                    p
+                        input(class="button-primary edit-button" data-id='#{expense._id}' type="submit" value="submit")
     h4 Total expense:
     p
         span(id='expense-total' data-total='#{total}') #{(total/100).toFixed(2)} GBP
