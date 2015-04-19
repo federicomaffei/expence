@@ -79,7 +79,7 @@ exports.register = function(server, options, next) {
                 username: request.payload.username
             });
 
-            User.register(newUser, request.payload.password, function(err, user) {
+            User.register(newUser, request.payload.password, function(err) {
                 if (err) {
                     reply(err);
                     return;

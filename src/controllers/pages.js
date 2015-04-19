@@ -51,6 +51,23 @@ exports.init = function(server) {
     });
 
     server.route({
+        method: 'DELETE',
+        path: '/expenses/{id}',
+        handler: function (request, reply) {
+            Expense.findByIdAndRemove(request.params.id, function(err, expense){
+                if(expense) {
+                    reply(200);
+                } else {
+                    reply(err);
+                }
+            });
+        },
+        config: {
+            auth: 'session'
+        }
+    });
+
+    server.route({
         method: 'GET',
         path: '/expenses',
         handler: function (request, reply) {

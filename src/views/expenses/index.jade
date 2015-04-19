@@ -3,7 +3,9 @@ block content
     h4 Here are your expenses:
     ul.expense-list
         each expense in expenses
-            li.expense-item #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.category} on #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}
+            li(id='expense-#{expense._id}') #{(expense.amount/100).toFixed(2)} #{expense.currency} for #{expense.category} on #{moment(expense.creationDate).format("dddd, MMMM Do YYYY, h:mm a")}&nbsp;
+                span(class='delete-link' data-id='#{expense._id}' data-amount='#{expense.amount}' data-method='delete')
+                    i(class='delete-icon fa fa-trash-o fa-2x')
     h4 Total expense:
     p
-        span #{(total/100).toFixed(2)} GBP
+        span(id='expense-total' data-total='#{total}') #{(total/100).toFixed(2)} GBP

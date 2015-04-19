@@ -48,7 +48,7 @@ server.register([
     server.start(function (err) {
         if(err) {
           console.log(err);
-        };
+        }
         console.log('Server running at:', server.info.uri);
     });
 });
