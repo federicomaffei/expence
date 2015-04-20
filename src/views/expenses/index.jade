@@ -4,6 +4,7 @@ block content
     h4 Here are your expenses:
     ul.expense-list
         each expense in expenses
+            - var id = expense._id
             li(id='expense-#{expense._id}')
                 span(id='expense-amount-#{expense._id}') #{(expense.amount/100).toFixed(2)}
                 span &nbsp;
@@ -15,13 +16,13 @@ block content
                 span &nbsp;
                 span(class='edit-link' data-id='#{expense._id}')
                     i(class='item-icon fa fa-pencil fa-2x')
-                span(class='delete-link' data-id='#{expense._id}' data-amount='#{expense.amount}')
+                span(id='delete-link-#{expense._id}' class='delete-link' data-id='#{expense._id}' data-amount='#{expense.amount}')
                     i(class='item-icon fa fa-trash-o fa-2x')
                 div(id='edit-form-#{expense._id}' class='edit-form')
                     p
                         include ../partials/expense-form
                     p
-                        input(class="button-primary edit-button" data-id='#{expense._id}' type="submit" value="submit")
+                        input(class="button-primary edit-button" data-id='#{expense._id}' data-user='#{expense.creator}' type="submit" value="submit")
     h4 Total expense:
     p
         span(id='expense-total' data-total='#{total}') #{(total/100).toFixed(2)} GBP

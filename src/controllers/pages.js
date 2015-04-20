@@ -58,7 +58,31 @@ exports.init = function(server) {
                 if(expense) {
                     reply(200);
                 } else {
-                    reply(err);
+                    reply(404);
+                }
+            });
+        },
+        config: {
+            auth: 'session'
+        }
+    });
+
+    server.route({
+        method: 'PATCH',
+        path: '/expenses/{id}',
+        handler: function (request, reply) {
+            var query = {"_id": request.params.id};
+            var update = {
+                amount: request.payload.amount * 100,
+                creator: request.user._id,
+                currency: request.payload.currency,
+                category: request.payload.category
+            };
+            Expense.findOneAndUpdate(query, update, function(err, expense){
+                if(expense) {
+                    reply(200);
+                } else {
+                    reply(404);
                 }
             });
         },

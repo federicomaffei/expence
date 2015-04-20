@@ -1,14 +1,18 @@
 $(document).ready(function(){
     var deleteLink = $('.delete-link');
-    var deleteId = deleteLink.data('id');
+    var totalId = $('#expense-total');
+    var newTotal = parseInt(totalId.data('total'));
     deleteLink.click(function(){
-        var newTotal = parseInt($('#expense-total').data('total')) - parseInt(this.dataset.amount);
+        var deleteId = this.dataset.id;
+        var deleteLinkId = $('#delete-link-' + deleteId);
         $.ajax({
             url: '/expenses/' + deleteId,
             type: 'DELETE',
             success: function() {
+                newTotal = newTotal - parseInt(deleteLinkId.data('amount'));
+                totalId.text((newTotal/100).toFixed(2) + ' GBP');
+                totalId.attr('data-total', newTotal);
                 $('#expense-' + deleteId).remove();
-                $('#expense-total').text((newTotal/100).toFixed(2) + ' GBP');
             }
         });
     });
@@ -27,19 +31,26 @@ $(document).ready(function(){
     var editButton = $('.edit-button');
     editButton.click(function(){
         var editId = this.dataset.id;
+        var data = {
+            amount: $('#amount-input-' + editId).val(),
+            creator: this.dataset.user,
+            currency: $('#currency-input-' + editId).val(),
+            category: $('#category-input-' + editId).val()
+        };
         $.ajax({
-            type: "PUT",
+            type: "PATCH",
             contentType: "application/json; charset=utf-8",
             url: '/expenses/' + editId,
-            data: JSON.stringify({
-
-            }),
+            data: JSON.stringify(data),
             dataType: "json",
-            success: function (msg) {
-                console.log(msg);
+            success: function() {
+                $('#expense-amount-'+ editId).text(parseInt(data.amount).toFixed(2));
+                $('#expense-currency-'+ editId).text(data.currency);
+                $('#expense-category-'+ editId).text(data.category);
+                $('#edit-form-' + editId).hide('fast');
             },
-            error: function (err){
-                console.log(err);
+            error: function(){
+                console.log('Error');
             }
         });
     });

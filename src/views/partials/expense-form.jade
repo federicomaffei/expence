@@ -1,15 +1,15 @@
 p
     label amount
-    input(type="text" name="amount" placeholder="5.00")
+    input(id='amount-input-#{id}' type="text" name="amount" placeholder="5.00")
 p
     label currency
-    select(name="currency")
+    select(id='currency-input-#{id}' name="currency")
         option(value="GBP" selected=true) &pound;
         option(value="USD") &#36;
         option(value="EUR") &euro;
 p
     label category
-    select(name="category")
+    select(id='category-input-#{id}' name="category")
         option(value="shopping" selected=true) shopping
         option(value="drinks & food") drinks & food
         option(value="rent") rent
