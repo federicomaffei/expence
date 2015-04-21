@@ -13,34 +13,13 @@ div.header {
     margin-bottom: 30px;
 }
 
+div.navmenu {
+    text-align: center;
+}
+
 div.row {
+    margin: 30px 0 0 0;
     height: 100%;
-}
-
-div.navbar {
-    height: 100%;
-}
-
-div.two.columns.navbar {
-    position: relative;
-}
-
-div.ten.columns.navbar {
-    margin-left: 0;
-    position: relative;
-}
-
-div.usermenu {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-div.logo {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 h4.maintitle {

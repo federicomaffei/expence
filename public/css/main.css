@@ -2,6 +2,12 @@ div.edit-form {
     display: none;
 }
 
+div.landing-content {
+    margin: 100px 0 0 0;
+    font-size: 5em;
+    text-align: center;
+}
+
 i.item-icon {
     margin-left: 15px;
 }
